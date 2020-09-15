@@ -439,7 +439,7 @@ process MAKE_GENOME_FILTER {
     path '*.sizes' into ch_genome_sizes_bigwig         // CHROMOSOME SIZES FILE FOR BEDTOOLS
 
     script:
-    blacklist_filter = params.blacklist ? "sortBed -i $blacklist -g ${fasta}.sizes | complementBed -i stdin -g ${fasta}.sizes" : "awk '{print \$1, '0' , \$2}' OFS='\t' ${fasta}.sizes"
+    blacklist_filter = params.blacklist ? "sortBed -i $blacklist -faidx ${fasta}.sizes | complementBed -i stdin -g ${fasta}.sizes" : "awk '{print \$1, '0' , \$2}' OFS='\t' ${fasta}.sizes"
     """
     samtools faidx $fasta
     cut -f 1,2 ${fasta}.fai > ${fasta}.sizes
