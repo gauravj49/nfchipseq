@@ -69,10 +69,10 @@ do
   pvalue="${pd//_/.}"
   echo ${pvalue}
   peaksOutDir=${customPeaksDir}/p${pd}
-  macs2 callpeak -f BAM --seed=39751 -g mm  -p ${pvalue} --keep-dup auto  --cutoff-analysis -t  /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/results/bwa/mergedLibrary/foxp1ovko_200519062115_A0000504_FKO372Foxp1_mmu_chipseq_se_R1.mLb.clN.sorted.bam -c /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/results/bwa/mergedLibrary/foxp1ovko_200519062115_A0000504_FKO372Input_mmu_chipseq_se_R1.mLb.clN.sorted.bam -n foxp1ovko_200519062115_A0000504_FKO372Foxp1_mmu_chipseq_se_R1_${pd} --outdir ${peaksOutDir}
-  macs2 callpeak -f BAM --seed=39751 -g mm  -p ${pvalue} --keep-dup auto  --cutoff-analysis -t  /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/results/bwa/mergedLibrary/foxp1ovko_200519062115_A0000504_FKO387Foxp1_mmu_chipseq_se_R1.mLb.clN.sorted.bam -c /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/results/bwa/mergedLibrary/foxp1ovko_200519062115_A0000504_FKO387Input_mmu_chipseq_se_R1.mLb.clN.sorted.bam -n foxp1ovko_200519062115_A0000504_FKO387Foxp1_mmu_chipseq_se_R1_${pd} --outdir ${peaksOutDir}
-  macs2 callpeak -f BAM --seed=39751 -g mm  -p ${pvalue} --keep-dup auto  --cutoff-analysis -t  /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/results/bwa/mergedLibrary/foxp1ovko_200519062115_A0000504_PKF1OE057Foxp1_mmu_chipseq_se_R1.mLb.clN.sorted.bam -c /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/results/bwa/mergedLibrary/foxp1ovko_200519062115_A0000504_PKF1OE057Input_mmu_chipseq_se_R1.mLb.clN.sorted.bam -n foxp1ovko_200519062115_A0000504_PKF1OE057Foxp1_mmu_chipseq_se_R1_${pd} --outdir ${peaksOutDir}
-  macs2 callpeak -f BAM --seed=39751 -g mm  -p ${pvalue} --keep-dup auto  --cutoff-analysis -t  /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/results/bwa/mergedLibrary/foxp1ovko_200519062115_A0000504_PKF1OE062Foxp1_mmu_chipseq_se_R1.mLb.clN.sorted.bam -c /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/results/bwa/mergedLibrary/foxp1ovko_200519062115_A0000504_PKF1OE062Input_mmu_chipseq_se_R1.mLb.clN.sorted.bam -n foxp1ovko_200519062115_A0000504_PKF1OE062Foxp1_mmu_chipseq_se_R1_${pd} --outdir ${peaksOutDir}
+  macs2 callpeak -f BAM --seed=39751 -g mm  -p ${pvalue} --keep-dup auto  --cutoff-analysis -t  /media/rad/HDD1/nfchip/thorsten/h3k27acFkoPkf1oe/results/bwa/mergedLibrary/A0000525-FKO-372-H3K27ac_R1.mLb.clN.sorted.bam -c/media/rad/HDD1/nfchip/thorsten/h3k27acFkoPkf1oe/results/bwa/mergedLibrary/A0000525-FKO-372-Input_R1.mLb.clN.sorted.bam -n A0000525-FKO-372-H3K27ac_mmu_chipseq_se_R1_${pd} --outdir ${peaksOutDir}
+  macs2 callpeak -f BAM --seed=39751 -g mm  -p ${pvalue} --keep-dup auto  --cutoff-analysis -t  /media/rad/HDD1/nfchip/thorsten/h3k27acFkoPkf1oe/results/bwa/mergedLibrary/A0000525-FKO-387-H3K27ac_R1.mLb.clN.sorted.bam -c /media/rad/HDD1/nfchip/thorsten/h3k27acFkoPkf1oe/results/bwa/mergedLibrary/A0000525-FKO-387-Input_R1.mLb.clN.sorted.bam -n A0000525-FKO-387-H3K27ac_mmu_chipseq_se_R1_${pd} --outdir ${peaksOutDir}
+  macs2 callpeak -f BAM --seed=39751 -g mm  -p ${pvalue} --keep-dup auto  --cutoff-analysis -t  /media/rad/HDD1/nfchip/thorsten/h3k27acFkoPkf1oe/results/bwa/mergedLibrary/A0000525-PKF1OE-057-H3K27ac_R1.mLb.clN.sorted.bam -c /media/rad/HDD1/nfchip/thorsten/h3k27acFkoPkf1oe/results/bwa/mergedLibrary/A0000525-PKF1OE-057-Input_R1.mLb.clN.sorted.bam -n A0000525-PKF1OE-057-H3K27ac_mmu_chipseq_se_R1_${pd} --outdir ${peaksOutDir}
+  macs2 callpeak -f BAM --seed=39751 -g mm  -p ${pvalue} --keep-dup auto  --cutoff-analysis -t  /media/rad/HDD1/nfchip/thorsten/h3k27acFkoPkf1oe/results/bwa/mergedLibrary/A0000525-PKF1OE-062-H3K27ac_R1.mLb.clN.sorted.bam -c /media/rad/HDD1/nfchip/thorsten/h3k27acFkoPkf1oe/results/bwa/mergedLibrary/A0000525-PKF1OE-062-Input_R1.mLb.clN.sorted.bam -n A0000525-PKF1OE-062-H3K27ac_mmu_chipseq_se_R1_${pd} --outdir ${peaksOutDir}
 done
 # cat > ${customPeaksDir}/${projName}_macs2_callpeak_p005.sh
 # # Cltr+C
@@ -89,6 +89,65 @@ do
   Rscript ${jobdir}/scripts/R_annotate_peaks_chipseeker.R -if=${peaksInputFile} -of=${peaksAnnTxtFile} -sp=${species} -mf -ac
  done
 done
+
+0.0001 
+
+# 3.3) Run CRCs
+# 3.3.1) Get sample folders with respective bam and peaks file
+# General pipeline parameters
+species="mouse"
+user="thorsten"
+projName="h3k27acFkoPkf1oe"
+outdir="/media/rad/HDD1/nfchip"
+jobdir="/home/rad/users/gaurav/projects/workflows/nfchipseq"
+# Script specific parameters
+# projDir="/media/rad/HDD1/nfchip/${user}/${projName}/gjchip"
+projDir="${outdir}/${user}/${projName}"
+bamDir=${projDir}/results/bwa/mergedLibrary
+analysisDir="${projDir}/analysis"
+customPeaksDir="${analysisDir}/customPeaks"
+peaksDir=${customPeaksDir}/p0_0001
+crcDir="${analysisDir}/crcs"; mkdir -p ${crcDir}
+
+cd /home/rad/users/gaurav/projects/ctrc
+bash scripts/create_nf_sample_dirs.sh ${projName} ${crcDir} ${bamDir} ${peaksDir}
+
+rm -rf ${crcDir}/*Input*
+
+# 3.3.2) Call SuperEnhancers using ROSE2 and Core Regulatory Circuits (CRCs) using crc2
+speciesGenomeAssembly="mm10" 
+bash scripts/get_crcs.sh ${crcDir} ${projName} ${speciesGenomeAssembly} nf
+
+# 3.3.3) Run the CRCs wrapper
+scriptsdir="/home/rad/users/gaurav/projects/ctrc/scripts/03_crcs/${projName}"
+rm -rf ${scriptsdir}/CRCLogs_crcs.sh
+# cmd="parallel ::: "; for s in ${scriptsdir}/*.sh; do chmod 775 ${s}; cmd=$(echo "${cmd} ${s}"); done; eval ${cmd}
+for s in ${scriptsdir}/*.sh; do echo ${s}; chmod 775 ${s}; bash ${s}; done;
+cd -
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 2.2) Generate consensus peaks region file and raw count matrix for:
 projDir="${outdir}/${user}/${projName}"

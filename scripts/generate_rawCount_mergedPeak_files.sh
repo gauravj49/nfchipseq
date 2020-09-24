@@ -6,10 +6,11 @@ projDir=${1:-"/media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe"}
 peaksShape=${2:-"narrowPeak"} # or broadPeak
 peaksDir=${3:-"${projDir}/results/bwa/mergedLibrary/macs/${peaksShape}"}
 analysisDir=${4:-"${projDir}/analysis"}; mkdir -p ${analysisDir}
+bamFileDir=${5:-"${projDir}/results/bwa/mergedLibrary"};
 
 # Parameters to run the pipeline
 projName=$(basename ${projDir})
-bamFiles=${projDir}/results/bwa/mergedLibrary/*.bam
+bamFiles=${bamFileDir}/*.bam
 # peaksDir=${projDir}/results/bwa/mergedLibrary/macs/${peaksShape}
 # Get relevant directories
 # analysisDir="${projDir}/analysis"; mkdir -p ${analysisDir}
