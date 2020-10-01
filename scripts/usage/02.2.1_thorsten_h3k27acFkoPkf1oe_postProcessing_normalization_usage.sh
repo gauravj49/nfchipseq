@@ -90,8 +90,6 @@ do
  done
 done
 
-0.0001 
-
 # 3.3) Run CRCs
 # 3.3.1) Get sample folders with respective bam and peaks file
 # General pipeline parameters
@@ -123,6 +121,11 @@ scriptsdir="/home/rad/users/gaurav/projects/ctrc/scripts/03_crcs/${projName}"
 rm -rf ${scriptsdir}/CRCLogs_crcs.sh
 # cmd="parallel ::: "; for s in ${scriptsdir}/*.sh; do chmod 775 ${s}; cmd=$(echo "${cmd} ${s}"); done; eval ${cmd}
 for s in ${scriptsdir}/*.sh; do echo ${s}; chmod 775 ${s}; bash ${s}; done;
+cd -
+
+# Zip the crc output excluding certain files and directories
+cd /media/rad/HDD1/nfchip/thorsten/h3k27acFkoPkf1oe/analysis
+zip -r crcs.zip crcs -x *.bam* crcsbamliquidator/**/* crcsFIMO/**/*
 cd -
 
 

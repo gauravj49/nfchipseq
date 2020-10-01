@@ -64,7 +64,8 @@ customPeaksDir="${analysisDir}/customPeaks"; mkdir -p ${customPeaksDir}
 
 # Cat the following commands in a temporary file and run using gnu parallel
 # # modify manually for H3k4me1 marks to run peaks as broad peaks
-for pd in 0_0001 0_00005 0_000001
+# for pd in 0_005 0_0001 0_00005 0_000001
+for pd in 0_005
 do
   pvalue="${pd//_/.}"
   echo ${pvalue}
@@ -80,7 +81,8 @@ done
 # parallel :::: ${customPeaksDir}/${projName}_macs2_callpeak_p005.sh
 
 # Annotate using chipseeker
-for pd in 0_005 0_0001 0_00005 0_000001 
+# for pd in 0_0001 0_00005 0_000001 
+for pd in 0_005
 do
  peaksOutDir=${customPeaksDir}/p${pd}
  for peaksInputFile in $(ls ${peaksOutDir}/*.narrowPeak)
@@ -115,7 +117,13 @@ do
   echo ""
 done
 
+# Get clean consensus regions
+# -A	Remove entire feature if any overlap. That is, by default, only subtract the portion of A that overlaps B. Here, if any overlap is found (or -f amount), the entire feature is removed
 
-# bash /home/rad/users/gaurav/projects/workflows/nfatacseq/scripts/parse_nfatacseq_consensus_peaks_annotation.sh mouse thorsten foxp1FkoPkf1oe /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/analysis/customPeaks/customConsensus/OE/consensus /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/results/bwa/mergedLibrary /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/analysis/customPeaks/customConsensus/OE/consensus/interimFiles/foxp1FkoPkf1oe_consensus_peaks.mLb.clN.boolean.txt /home/rad/users/gaurav/projects/workflows/nfatacseq
-# bash /home/rad/users/gaurav/projects/workflows/nfatacseq/scripts/parse_nfatacseq_consensus_peaks_annotation.sh mouse thorsten foxp1FkoPkf1oe /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/analysis/customPeaks/customConsensus/FKO/consensus /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/results/bwa/mergedLibrary /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/analysis/customPeaks/customConsensus/FKO/consensus/interimFiles/foxp1FkoPkf1oe_consensus_peaks.mLb.clN.boolean.txt /home/rad/users/gaurav/projects/workflows/nfatacseq
-# bash /home/rad/users/gaurav/projects/workflows/nfatacseq/scripts/parse_nfatacseq_consensus_peaks_annotation.sh mouse thorsten foxp1FkoPkf1oe /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/analysis/customPeaks/customConsensus/OEFKO/consensus /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/results/bwa/mergedLibrary /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/analysis/customPeaks/customConsensus/OEFKO/consensus/interimFiles/foxp1FkoPkf1oe_consensus_peaks.mLb.clN.boolean.txt /home/rad/users/gaurav/projects/workflows/nfatacseq
+# All regions that are in overexp samples minus the KO samples
+bedtools subtract -a /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/analysis/customPeaks/customConsensus/thorstenCustomCensusPeaks/OE/foxp1FkoPkf1oe_consensus_peaks.bed -b /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/analysis/customPeaks/customConsensus/thorstenCustomCensusPeaks/FKO/foxp1FkoPkf1oe_consensus_peaks.bed -A > /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/analysis/customPeaks/customConsensus/diff_OE_minus_FKO/diff_foxp1_Pkf1oe_minus_Fko_consensus_peakRegions.bed
+
+# Get the raw counts and annotation files for the overexpression samples
+python -c "import sys; import pandas as pd; import datatable as dt; input_file=sys.argv[1]; input_bed=sys.argv[2]; outtxt_file=sys.argv[3]; infileDT = dt.fread(input_file, sep='\t', header=True, nthreads=16); bedDT = dt.fread(input_bed, sep='\t', header=False, nthreads=16); infileDF = infileDT.to_pandas(); bedDF = bedDT.to_pandas(); infileDF = infileDF[infileDF.index.isin(bedDF.index)]; infileDF.to_csv(outtxt_file, header=True, index=False, sep='\t', float_format='%.0f');" /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/analysis/customPeaks/customConsensus/thorstenCustomCensusPeaks/OE/foxp1FkoPkf1oe_consensus_peaks_rawCounts.txt /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/analysis/customPeaks/customConsensus/diff_OE_minus_FKO/diff_foxp1_Pkf1oe_minus_Fko_consensus_peakRegions.bed /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/analysis/customPeaks/customConsensus/diff_OE_minus_FKO/diff_foxp1_Pkf1oe_minus_Fko_consensus_peakRegions_rawCounts.txt
+
+python -c "import sys; import pandas as pd; import datatable as dt; input_file=sys.argv[1]; input_bed=sys.argv[2]; outtxt_file=sys.argv[3]; infileDT = dt.fread(input_file, sep='\t', header=True, nthreads=16); bedDT = dt.fread(input_bed, sep='\t', header=False, nthreads=16); infileDF = infileDT.to_pandas(); bedDF = bedDT.to_pandas(); infileDF = infileDF[infileDF.index.isin(bedDF.index)]; infileDF.to_csv(outtxt_file, header=True, index=False, sep='\t', float_format='%.0f');" /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/analysis/customPeaks/customConsensus/thorstenCustomCensusPeaks/OE/foxp1FkoPkf1oe_consensus_peaks_annotation.txt /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/analysis/customPeaks/customConsensus/diff_OE_minus_FKO/diff_foxp1_Pkf1oe_minus_Fko_consensus_peakRegions.bed /media/rad/HDD1/nfchip/thorsten/foxp1FkoPkf1oe/analysis/customPeaks/customConsensus/diff_OE_minus_FKO/diff_foxp1_Pkf1oe_minus_Fko_consensus_peakRegions_annotation.txt
