@@ -1142,7 +1142,8 @@ process MACS2 {
         $pileup \\
         $fdr \\
         $pvalue \\
-        --keep-dup all
+        --keep-dup all\\
+        --cutoff-analysis
 
     cat ${ip}_peaks.${PEAK_TYPE} | wc -l | awk -v OFS='\t' '{ print "${ip}", \$1 }' | cat $peak_count_header - > ${ip}_peaks.count_mqc.tsv
 
