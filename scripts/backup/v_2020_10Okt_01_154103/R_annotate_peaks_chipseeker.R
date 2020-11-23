@@ -69,7 +69,7 @@ main <- function(){
   cat("\n\t- Annotate regions\n")
   peakAnno <- annotatePeak(peaksBed, tssRegion=c(-3000, 3000), TxDb=txdb, annoDb=andb)
 
-  # Convert to datatable 
+  # Convert to dataframe 
   peakAnnoDT <- as.data.table(peakAnno)
 
   # Rename the header
@@ -120,7 +120,7 @@ main <- function(){
   }
 
   # Merge on common ids and keep all the entires from the first data table
-  mergedPeaksDT <- merge(peakAnnoDT, origPeakDT, all.y=T, by="mergeID")
+  mergedPeaksDT <- merge(peakAnnoDT, origPeakDT,all.y=T, by="mergeID")
 
   # Remove additional columns
   mergedPeaksDT[, c('mergeID') :=NULL]

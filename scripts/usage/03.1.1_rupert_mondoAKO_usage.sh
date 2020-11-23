@@ -23,7 +23,7 @@ fastqDir="${projDir}/fastq"; mkdir -p ${fastqDir}
 
 # 1.2) Run the pipeline
 cd ${projDir}
-nextflow run /home/rad/users/gaurav/projects/workflows/nfchipseq --input ${projDir}/${projName}_SampleSheet.csv --genome GRCm38 --narrow_peak --single_end -name ${projName}
+nextflow run /home/rad/users/gaurav/projects/workflows/nfchipseq --input ${projDir}/${projName}_SampleSheet.csv --genome GRCm38 --narrow_peak --single_end -name ${projName} --skip_diff_analysis 0 --deseq2_vst 0
 
 #########################################################################################
 # 2) PREPROCESS OUTPUT OF THE PIPELINE FOR DOWNSTREAM ANALYSIS

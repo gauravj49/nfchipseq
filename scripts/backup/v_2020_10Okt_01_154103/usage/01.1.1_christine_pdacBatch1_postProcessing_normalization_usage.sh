@@ -98,23 +98,3 @@ cd -
 # # cmd="parallel ::: "; for s in ${scriptsdir}/*.sh; do chmod 775 ${s}; cmd=$(echo "${cmd} ${s}"); done; eval ${cmd}
 # for s in ${scriptsdir}/*.sh; do echo ${s}; chmod 775 ${s}; bash ${s}; done;
 # cd -
-
-
-# 3.3.4) Run Extended network analysis
-cd /home/rad/users/gaurav/projects/ctrc/scripts/CLL_TFnetworks_2018
-analysisDir="/media/rad/HDD1/nfchip/christine/pdacBatch1/gjchip/analysis/crcs/extendedNetworks"
-crcDir="/media/rad/HDD1/nfchip/christine/pdacBatch1/gjchip/analysis/crcs"
-atacPeakDir="/media/rad/HDD1/atacseq/christine/AGRad_ATACseq_MUC001/analysis/customPeaks/mergedLibrary/q0_01"
-genome="MM10"
-
-# Define the pairs of chip and atac samples
-chipSamples=(123abcam-53646-PPT-1 124abcam-53646-LivMet-1 125abcam-53646-LivMet-2 126abcam-53646-LivMet-3 127abcam-5320-PPT-1 128abcam-5320-LungMet-1 129abcam-5320-LivMet-1 130abcam-5320-LivMet-3)
-atacSamples=(53646_PPT-1 53646_LivMet-1 53646_LivMet-2 53646_LivMet-3 5320_PPT-1 5320_LungMet-1 5320_LivMet-1 5320_LivMet-3)
-
-for ((i=0;i<${#chipSamples[@]};i++))
-do
-	echo python extendedSuperNetwork.py -pn=${chipSamples[$i]} -ad=${analysisDir} -nf=${crcDir}/${chipSamples[$i]}/crcs${chipSamples[$i]}_NODELIST.txt -se=${crcDir}/${chipSamples[$i]}/rose2/${chipSamples[$i]}_summits_SuperEnhancers.table.txt -ap=${atacPeakDir}/${atacSamples[$i]}_005_R1_peaks.broadPeak -gn=${genome}
-	python extendedSuperNetwork.py -pn=${chipSamples[$i]} -ad=${analysisDir} -nf=${crcDir}/${chipSamples[$i]}/crcs${chipSamples[$i]}_NODELIST.txt -se=${crcDir}/${chipSamples[$i]}/rose2/${chipSamples[$i]}_summits_SuperEnhancers.table.txt -ap=${atacPeakDir}/${atacSamples[$i]}_005_R1_peaks.broadPeak -gn=${genome}
-	echo 
-done
-cd /home/rad/users/gaurav/projects/workflows/nfchipseq
