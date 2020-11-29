@@ -106,11 +106,10 @@ analysisDir="/media/rad/HDD1/nfchip/christine/pdacBatch1/gjchip/analysis/crcs/ex
 crcDir="/media/rad/HDD1/nfchip/christine/pdacBatch1/gjchip/analysis/crcs"
 atacPeakDir="/media/rad/HDD1/atacseq/christine/AGRad_ATACseq_MUC001/analysis/customPeaks/mergedLibrary/q0_01"
 genome="MM10"
-
 # Define the pairs of chip and atac samples
 chipSamples=(123abcam-53646-PPT-1 124abcam-53646-LivMet-1 125abcam-53646-LivMet-2 126abcam-53646-LivMet-3 127abcam-5320-PPT-1 128abcam-5320-LungMet-1 129abcam-5320-LivMet-1 130abcam-5320-LivMet-3)
 atacSamples=(53646_PPT-1 53646_LivMet-1 53646_LivMet-2 53646_LivMet-3 5320_PPT-1 5320_LungMet-1 5320_LivMet-1 5320_LivMet-3)
-
+# Run the samples
 for ((i=0;i<${#chipSamples[@]};i++))
 do
 	echo python extendedSuperNetwork.py -pn=${chipSamples[$i]} -ad=${analysisDir} -nf=${crcDir}/${chipSamples[$i]}/crcs${chipSamples[$i]}_NODELIST.txt -se=${crcDir}/${chipSamples[$i]}/rose2/${chipSamples[$i]}_summits_SuperEnhancers.table.txt -ap=${atacPeakDir}/${atacSamples[$i]}_005_R1_peaks.broadPeak -gn=${genome}
@@ -118,3 +117,11 @@ do
 	echo 
 done
 cd /home/rad/users/gaurav/projects/workflows/nfchipseq
+
+# 3.3.5) Intersect the extended network file with the super enhancer table
+for ((i=0;i<${#chipSamples[@]};i++))
+do
+	echo ${chipSamples[$i]}
+	python -c "import sys; import pandas as pd; import datatable as dt; input_file=sys.argv[1]; input_supenc=sys.argv[2]; outtxt_file=sys.argv[3]; infileDT = dt.fread(input_file, sep='\t', header=True, nthreads=16); supencDT = dt.fread(input_supenc, sep='\t', header=True, nthreads=16); infileDT = dt.fread(input_file, sep='\t', header=True, nthreads=16); supencDT = dt.fread(input_supenc, sep='\t', header=True, nthreads=16); infileDF = infileDT.to_pandas(); infileDF.set_index('REGION_ID', inplace=True); supencDF = supencDT.to_pandas(); supencList = supencDF.columns.tolist(); infileDF = infileDF[infileDF.index.isin(supencList)]; infileDF.reset_index(level=0, inplace=True); infileDFColumns = infileDF.columns.tolist(); infileDFColumns.insert(3,infileDFColumns.pop(0)); infileDF = infileDF[infileDFColumns]; infileDF.to_csv(outtxt_file, header=True, index=False, sep='\t', float_format='%.0f');" ${crcDir}/${chipSamples[$i]}/rose2/${chipSamples[$i]}_summits_SuperEnhancers.table.txt ${crcDir}/extendedNetworks/${chipSamples[$i]}/${chipSamples[$i]}_extendedNetwork.allEnhancers.matrix.txt ${crcDir}/extendedNetworks/${chipSamples[$i]}/${chipSamples[$i]}_allEnhancers_matrix_intersect_superEnhancers_table.txt
+	echo 
+done
